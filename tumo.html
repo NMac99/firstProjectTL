@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Analyzer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            transition: background-color 0.5s;
+        }
+        textarea {
+            width: 80%;
+            height: 150px;
+            padding: 10px;
+            font-size: 16px;
+        }
+        .btn {
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            border: none;
+            background: blue;
+            color: white;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Text Analyzer</h1>
+    <textarea id="textInput" placeholder="Type or paste your text here..."></textarea>
+    <p><strong>Letters:</strong> <span id="letterCount">0</span></p>
+    <p><strong>Words:</strong> <span id="wordCount">0</span></p>
+    <p><strong>Sentences:</strong> <span id="sentenceCount">0</span></p>
+    <button class="btn" onclick="randomizeBackground()">Random Background</button>
+
+    <script>
+        function countTextMetrics() {
+            let text = document.getElementById("textInput").value;
+            document.getElementById("letterCount").textContent = text.replace(/\s/g, "").length;
+            document.getElementById("wordCount").textContent = text.trim() ? text.trim().split(/\s+/).length : 0;
+            document.getElementById("sentenceCount").textContent = text.trim() ? text.split(/[.!?]+/).filter(Boolean).length : 0;
+        }
+        
+        function randomizeBackground() {
+            document.body.style.backgroundColor = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+        }
+        
+        document.getElementById("textInput").addEventListener("input", countTextMetrics);
+    </script>
+</body>
+</html>
